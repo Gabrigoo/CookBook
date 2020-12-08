@@ -1,0 +1,27 @@
+{
+  "recipes" : [ {
+    "ingredients" : [ {
+      "amount" : "5",
+      "description" : "of onion",
+      "unit" : "heads"
+    }, {
+      "amount" : "1",
+      "description" : "of milk",
+      "unit" : "liter"
+    } ],
+    "instructions" : [ {
+      "description" : "Just mix it up"
+    } ],
+    "name" : "First recipe"
+  }, {
+    "ingredients" : [ {
+      "amount" : "2",
+      "description" : "of sugar",
+      "unit" : "spoons"
+    } ],
+    "instructions" : [ {
+      "description" : "Mix"
+    } ],
+    "name" : "Second recipe"
+  } ]
+}

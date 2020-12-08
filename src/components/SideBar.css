@@ -1,0 +1,25 @@
+#sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: lightgray;
+    border-left: solid black 2px;
+}
+#userlabel {
+    text-align: center;
+    height: 50px;
+}
+li {
+    font-size: 18px;
+}
+#add-new-recipe-button {
+    font-size: 18px;
+    margin: 20px auto 0px auto;
+    height: 40px;
+    width: 120px;
+}

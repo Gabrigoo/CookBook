@@ -1,0 +1,15 @@
+.mapped-input {
+    display: flex;
+    flex-direction: column;
+}
+.add-button {
+    width: 80px;
+    height: 30px;
+    margin-top: 5px;
+    margin-left: 15px;
+    color: green;
+}
+#recipes-container {
+    padding: 2%;
+    width: 66%;
+}

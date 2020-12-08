@@ -1,0 +1,9 @@
+.ingredient {
+    display: grid;
+    grid-template-columns: 10px 40px 60px 50% 33px auto;
+    column-gap: 5px;
+    margin-bottom: 6px;
+}
+.text-right {
+    text-align: right;
+}
