@@ -1,5 +1,5 @@
 import firebase from 'firebase/app';
-import React, { MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import 'firebase/auth';
 import 'firebase/firestore';
 
