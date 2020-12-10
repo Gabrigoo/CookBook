@@ -1,53 +1,52 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Recipe.css';
 import Ingredient from './Ingredient';
 import Instruction from './Instruction';
 
-interface ingredientProps {
+interface IngredientProps {
     amount: string,
     unit: string,
     description: string
 }
 
-interface instructionProps {
+interface InstructionProps {
     description: string
+}
+
+interface RecipeInt {
+    name: string,
+    ingredients: IngredientProps[],
+    instructions: InstructionProps[]
 }
 
 interface RecipeProps {
     currentRecipe: number,
-    recipes: {
-        [key:string]: {
-            name: string,
-            ingredients: ingredientProps[],
-            instructions: instructionProps[]
-        }
-    }
+    recipes: RecipeInt[],
     changeIngredients: (value: string, lype: any, index: number) => void,
     changeInstructions: (value: string, lype: any, index: number) => void,
     deleteIngredient: (index: number) => void,
     deleteInstruction: (index: number) => void,
     addIngredients: () => void,
     addInstructions: () => void,
+    changeTitle: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    deleteRecipe: (index :number) => void,
 }
 
 const Recipe: React.FC<RecipeProps> = ({ 
-    currentRecipe, recipes, changeIngredients, changeInstructions, 
-    deleteIngredient, deleteInstruction, addIngredients, addInstructions
+    currentRecipe, recipes, changeIngredients, changeInstructions, deleteRecipe,
+    deleteIngredient, deleteInstruction, addIngredients, addInstructions, changeTitle
 }) => {
-
-    const emptyIngredient = {
-        amount: '',
-        unit: '',
-        description: ''
-    }
-    const emptyInstruction = {
-        description: ''
-    }
 
     return (
         <div id="recipes-container">
-            <h2>{recipes[currentRecipe].name}</h2>
-            <h3>Ingredients:</h3>
+            <input
+                onChange={(event) => changeTitle(event)}
+                name="name"
+                id="recipe-title"
+                value={recipes[currentRecipe].name}
+                autoComplete="off"
+                ></input>
+            <h2>Hozzávalók:</h2>
             <div className="mapped-input">
                 {recipes[currentRecipe].ingredients.map((item, index) => {
                     return <Ingredient 
@@ -65,7 +64,7 @@ const Recipe: React.FC<RecipeProps> = ({
             >
                 <i className={`plus circle icon`} />
             </button>
-            <h3>Instructions:</h3>
+            <h2>Instrukciók:</h2>
             <div className="mapped-input">
                 {recipes[currentRecipe].instructions.map((item, index) => {
                     return <Instruction
@@ -82,6 +81,13 @@ const Recipe: React.FC<RecipeProps> = ({
                 onClick={addInstructions}
             >
                 <i className={`plus circle icon`} />
+            </button>
+            <hr />
+            <button
+                onClick={() => deleteRecipe(currentRecipe)}
+                id="delete-recipe"
+            >
+                Recept törlése
             </button>
         </div>
     )

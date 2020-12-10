@@ -13,3 +13,13 @@
     padding: 2%;
     width: 66%;
 }
+#recipe-title {
+    background: none;
+    font-size: 32px;
+}
+#delete-recipe {
+    font-size: 18px;
+    height: 40px;
+    width: 140px;
+    margin-top: 10px;
+}

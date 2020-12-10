@@ -1,9 +1,22 @@
 .ingredient {
     display: grid;
-    grid-template-columns: 10px 40px 60px 50% 33px auto;
+    width: 80%;
+    grid-template-columns: 10px 40px 60px auto 33px;
     column-gap: 5px;
     margin-bottom: 6px;
 }
 .text-right {
     text-align: right;
+}
+input {
+    font-size: 17px;
+    background-color: rgb(240, 239, 239);
+}
+input:valid {
+    border: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

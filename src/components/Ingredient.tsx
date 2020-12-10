@@ -26,16 +26,23 @@ const Ingredient: React.FC<ingredientProps> = ({ content, index, changeIngredien
                 name="amount"
                 value={content.amount}
                 onChange={onInputChange}
+                autoComplete="off"
+                type="number"
+                required
             />
             <input
                 name="unit"
                 value={content.unit}
                 onChange={onInputChange}
+                autoComplete="off"
+                required
             />
             <input
                 name="description"
                 value={content.description}
                 onChange={onInputChange}
+                autoComplete="off"
+                required
             />
             <button 
                 className="delete-button"

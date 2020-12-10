@@ -1,27 +1,28 @@
 import React, { ReactElement } from 'react';
+import { saveData } from '../axios-instance';
 import './SideBar.css';
 
-interface ingredientProps {
+interface IngredientProps {
     amount: string,
     unit: string,
     description: string
 }
 
-interface instructionProps {
+interface InstructionProps {
     description: string
 }
 
 interface SideBarProps {
     user: string | null,
-    recipes: {
-        [key:string]: {
-            name: string,
-            ingredients: ingredientProps[],
-            instructions: instructionProps[]
-        }
-    }
+    recipes: RecipeInt[],
     addNewRecipe: () => void;
     setCurrent: (index: number) => void;
+}
+
+interface RecipeInt {
+    name: string,
+    ingredients: IngredientProps[],
+    instructions: InstructionProps[]
 }
 
 const SideBar: React.FC<SideBarProps> = ({ user, recipes, addNewRecipe, setCurrent }): ReactElement => {
@@ -29,7 +30,10 @@ const SideBar: React.FC<SideBarProps> = ({ user, recipes, addNewRecipe, setCurre
     const recipeList = Object.keys(recipes).map((item, index) => {
         return (
             <li key={recipes[index].name + index}>
-                <button onClick={() => setCurrent(index)}>{recipes[index].name}</button>
+                <button 
+                    className="recipe-button" 
+                    onClick={() => setCurrent(parseInt(item))}
+                >{recipes[index].name}</button>
             </li>
         )
     })
@@ -40,7 +44,10 @@ const SideBar: React.FC<SideBarProps> = ({ user, recipes, addNewRecipe, setCurre
             <ul>
                 {recipeList}
             </ul>
-            <button onClick={addNewRecipe} id="add-new-recipe-button">+ Add new</button>
+            <button onClick={addNewRecipe} id="add-new-recipe-button">+ Új recept</button>
+            <button onClick={() => saveData(recipes)} id="save-button">
+                <i className={`big save icon`} />
+            </button>
         </div>
     )
 }

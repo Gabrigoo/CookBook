@@ -2,74 +2,91 @@ import React, { ReactElement, useState } from 'react';
 import Recipe from '../components/Recipe';
 import SideBar from '../components/SideBar';
 
-interface ingredientProps {
+interface IngredientProps {
     amount: string,
     unit: string,
     description: string
 }
 
-interface instructionProps {
+interface InstructionProps {
     description: string
 }
 
 interface ContainerProps {
     user: string | null,
-    recipes: {
-        [key:string]: {
-            name: string,
-            ingredients: ingredientProps[],
-            instructions: instructionProps[]
-        }
-    }
+    recipes: RecipeInt[]
 }
+
+interface RecipeInt {
+    name: string,
+    ingredients: IngredientProps[],
+    instructions: InstructionProps[]
+}
+
 
 const Container: React.FC<ContainerProps> = (props): ReactElement => {
 
-    const [recipes, setRecipes] = useState(props.recipes);
+    const [recipes, setRecipes] = useState<RecipeInt[]>(props.recipes);
     const [currentRecipe, setCurrentRecipe] = useState(0);
 
+    console.log(currentRecipe)
+    console.log(recipes[currentRecipe])
+
     const addNewRecipe = () => {
-        const newObj = {
-            ...recipes
-        };
-        newObj[Object.keys(recipes).length] = {
-            name: "New recipe",
-            ingredients: [],
-            instructions: []
-        }
-        setRecipes(newObj);
+        const newRecipes = [...recipes];
+        newRecipes.push({
+            name: "Új recept",
+            ingredients: [{
+                amount: "",
+                unit: "",
+                description: ""
+            }],
+            instructions: [{
+                description: ""
+            }]
+        })
+        setRecipes(newRecipes);
     }
 
-    const changeIngredients = (value: string, type: keyof ingredientProps, index: number) => {
+    const deleteRecipe = (index: number) => {
+        const newRecipes = [...recipes];
+        newRecipes.splice(index, 1);
+        if (index > 0) {
+            setCurrentRecipe(index - 1);
+        }
+        setRecipes(newRecipes);
+    }
+
+    const changeIngredients = (value: string, type: keyof IngredientProps, index: number) => {
         const newObject = recipes[currentRecipe].ingredients[index];
         newObject[type] = value;
-        const newRecipes = {...recipes};
+        const newRecipes = [...recipes];
         newRecipes[currentRecipe].ingredients.splice(index, 1, newObject);
         setRecipes(newRecipes);
     }
 
-    const changeInstructions = (value: string, type: keyof instructionProps, index: number) => {
+    const changeInstructions = (value: string, type: keyof InstructionProps, index: number) => {
         const newObject = recipes[currentRecipe].instructions[index];
         newObject[type] = value;
-        const newRecipes = {...recipes};
+        const newRecipes = [...recipes];
         newRecipes[currentRecipe].instructions.splice(index, 1, newObject);
         setRecipes(newRecipes);
     }
 
     const deleteIngredient = (index: number) => {
-        const newRecipes = {...recipes};
+        const newRecipes = [...recipes];
         newRecipes[currentRecipe].ingredients.splice(index, 1);
         setRecipes(newRecipes);
     }
 
     const deleteInstruction = (index: number) => {
-        const newRecipes = {...recipes};
+        const newRecipes = [...recipes];
         newRecipes[currentRecipe].instructions.splice(index, 1);
         setRecipes(newRecipes);
     }
 
     const addIngredients = () => {
-        const newRecipes = {...recipes};
+        const newRecipes = [...recipes];
         newRecipes[currentRecipe].ingredients.push({
             amount: "",
             unit: "",
@@ -79,10 +96,16 @@ const Container: React.FC<ContainerProps> = (props): ReactElement => {
     }
 
     const addInstructions = () => {
-        const newRecipes = {...recipes};
+        const newRecipes = [...recipes];
         newRecipes[currentRecipe].instructions.push({
             description: ""
         });
+        setRecipes(newRecipes);
+    }
+
+    const changeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newRecipes = [...recipes];
+        newRecipes[currentRecipe].name = event.target.value;
         setRecipes(newRecipes);
     }
 
@@ -93,12 +116,19 @@ const Container: React.FC<ContainerProps> = (props): ReactElement => {
                 currentRecipe={currentRecipe}
                 changeIngredients={changeIngredients}
                 changeInstructions={changeInstructions}
+                changeTitle={changeTitle}
                 deleteIngredient={deleteIngredient}
                 deleteInstruction={deleteInstruction}
                 addIngredients={addIngredients}
                 addInstructions={addInstructions}
+                deleteRecipe={deleteRecipe}
             />
-            <SideBar user={props.user} recipes={recipes} addNewRecipe={addNewRecipe} setCurrent={setCurrentRecipe}/>
+            <SideBar 
+                user={props.user} 
+                recipes={recipes}
+                addNewRecipe={addNewRecipe} 
+                setCurrent={setCurrentRecipe}
+            />
         </div>
     )
 }
