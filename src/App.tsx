@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { instance as axios, getData } from './axios-instance';
-import { UserContext, TokenContext } from './providers/UserProvider';
+import { UserContext } from './providers/UserProvider';
 import { signInWithGoogle } from './firebase';
 import Container from './containers/Container';
 import './App.css';
