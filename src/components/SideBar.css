@@ -7,11 +7,12 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    background-color: lightgray;
+    background-color: rgb(243, 236, 212);
     border-left: solid black 2px;
 }
 #userlabel {
     text-align: center;
+    width: 70%;
     height: 50px;
 }
 #save-button {
@@ -29,9 +30,19 @@ li {
     height: 40px;
     width: 120px;
 }
+#flex-row {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .recipe-button {
     font-size: 23px;
     height: 32px;
     background: none;
     border: none;
+}
+#sign-out-button {
+    height: 30px;
+    margin-left: 10px;
 }

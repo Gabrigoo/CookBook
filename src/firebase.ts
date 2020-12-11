@@ -13,9 +13,7 @@ const firebaseConfig = {
   appId: "1:836042492115:web:1fa43ba626e5cf5ca5ec26"
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const firestore = firebase.firestore();
@@ -40,4 +38,13 @@ const signInWithGoogle = async (
   }
 };
 
-export { auth, firestore, signInWithGoogle };
+const handleSignOut = (): void => {
+  localStorage.removeItem('user');
+  localStorage.removeItem('email');
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  auth.signOut();
+  console.log('signing out');
+};
+
+export { auth, firestore, signInWithGoogle, handleSignOut };

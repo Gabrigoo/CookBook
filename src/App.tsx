@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { instance as axios, getData } from './axios-instance';
-import { UserContext } from './providers/UserProvider';
+import { UserContext, TokenContext } from './providers/UserProvider';
 import { signInWithGoogle } from './firebase';
 import Container from './containers/Container';
 import './App.css';
@@ -32,18 +32,20 @@ const App = () => {
     };
   }, [token, userId]);
 
+  console.log(token)
+
   let content;
 
-  if (data) {
+  if (user && data) {
     content = <Container user={user} recipes={data.recipes}/>;
-  } else if (!token) {
+  } else if (!user) {
     content = 
-    <>
-      <p>No user signed in</p>
-      <button onClick={event => signInWithGoogle(event)}>Sign in with google</button>
-    </>;
+    <div id="login-page">
+      <h2>Nincs bejelentkezett felhasználó</h2>
+      <button onClick={event => signInWithGoogle(event)}>Belépés Google-val</button>
+    </div>;
   } else {
-    content = <p>Loading...</p>;
+    content = <p>Töltés...</p>;
   }
 
   return (

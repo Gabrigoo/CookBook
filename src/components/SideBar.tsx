@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { saveData } from '../axios-instance';
+import { handleSignOut } from '../firebase';
 import './SideBar.css';
 
 interface IngredientProps {
@@ -40,7 +41,10 @@ const SideBar: React.FC<SideBarProps> = ({ user, recipes, addNewRecipe, setCurre
 
     return (
         <div id="sidebar">
-            <h2 id="userlabel">{user}</h2>
+            <div id="flex-row">
+                <h2 id="userlabel">{user}</h2>
+                <button onClick={handleSignOut} id="sign-out-button">Kilépés</button>
+            </div>
             <ul>
                 {recipeList}
             </ul>
