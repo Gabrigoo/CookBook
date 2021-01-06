@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IconButton, TextField, Grid, makeStyles } from '@material-ui/core';
+import { IconButton, TextField, Grid } from '@material-ui/core';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 
