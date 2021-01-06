@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, IconButton, List, ListItem, ListItemText, ListItemIcon,
+import { Button, IconButton, List, ListItem, ListItemText,
     Typography, Grid } from '@material-ui/core';
 
 import { Save } from '@material-ui/icons';

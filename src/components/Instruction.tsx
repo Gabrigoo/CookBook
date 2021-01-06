@@ -19,14 +19,6 @@ const Instruction: React.FC<instructionProps> = ({ content, index, changeInstruc
         changeInstructions(event.target.value, event.target.name, index);
     }
 
-    const useStyles = makeStyles((theme) => ({
-        textField: {
-            height: '100px',
-        },
-    }));
-
-    const classes = useStyles();
-
     return (
         <Grid container item direction="row" justify="flex-start" alignItems="center" spacing={1}>
             <Grid item xs={11}>
