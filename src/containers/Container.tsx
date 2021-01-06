@@ -29,9 +29,6 @@ const Container: React.FC<ContainerProps> = (props): ReactElement => {
     const [recipes, setRecipes] = useState<RecipeInt[]>(props.recipes);
     const [currentRecipe, setCurrentRecipe] = useState(0);
 
-    console.log(currentRecipe)
-    console.log(recipes[currentRecipe])
-
     const addNewRecipe = () => {
         const newRecipes = [...recipes];
         newRecipes.push({
@@ -103,14 +100,16 @@ const Container: React.FC<ContainerProps> = (props): ReactElement => {
         setRecipes(newRecipes);
     }
 
-    const changeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const changeTitle = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const newRecipes = [...recipes];
         newRecipes[currentRecipe].name = event.target.value;
         setRecipes(newRecipes);
     }
 
-    return (
-        <div>
+    let content;
+
+    if (recipes.length !== 0) {
+        content =
             <Recipe
                 recipes={recipes}
                 currentRecipe={currentRecipe}
@@ -123,14 +122,19 @@ const Container: React.FC<ContainerProps> = (props): ReactElement => {
                 addInstructions={addInstructions}
                 deleteRecipe={deleteRecipe}
             />
-            <SideBar 
-                user={props.user} 
-                recipes={recipes}
-                addNewRecipe={addNewRecipe} 
-                setCurrent={setCurrentRecipe}
-            />
-        </div>
-    )
+    } else {
+        content = <div></div>
+    }
+
+    return <div>
+        {content}
+        <SideBar 
+            user={props.user} 
+            recipes={recipes}
+            addNewRecipe={addNewRecipe} 
+            setCurrent={setCurrentRecipe}
+        />
+        </div>;
 }
 
 export default Container;

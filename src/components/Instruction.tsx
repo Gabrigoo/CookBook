@@ -1,5 +1,8 @@
 import React from 'react';
-import './Instruction.css';
+
+import { IconButton, TextField, Grid, makeStyles } from '@material-ui/core';
+
+import DeleteIcon from '@material-ui/icons/Delete';
 
 interface instructionProps {
     content: {
@@ -16,21 +19,38 @@ const Instruction: React.FC<instructionProps> = ({ content, index, changeInstruc
         changeInstructions(event.target.value, event.target.name, index);
     }
 
+    const useStyles = makeStyles((theme) => ({
+        textField: {
+            height: '100px',
+        },
+    }));
+
+    const classes = useStyles();
+
     return (
-        <div className="instruction">
-            <textarea
-                className="instruction"
-                name="description"
-                value={content.description}
-                onChange={onInputChange}
-            />
-            <button
-                className="delete-button"
-                onClick={() => deleteInstruction(index)}
-            >
-                <i className={`minus circle icon`} />
-            </button>
-        </div>
+        <Grid container item direction="row" justify="flex-start" alignItems="center" spacing={1}>
+            <Grid item xs={11}>
+                <TextField
+                    name="description"
+                    value={content.description}
+                    onChange={onInputChange}
+                    variant="filled"
+                    fullWidth
+                    multiline
+                />
+            </Grid>
+            <Grid item xs={1}>
+                {index ?
+                <IconButton
+                    aria-label="delete"
+                    onClick={() => deleteInstruction(index)}
+                    color="secondary"
+                >
+                    <DeleteIcon />
+                </IconButton>
+                : null}
+            </Grid>
+        </Grid>
     )
 }
 

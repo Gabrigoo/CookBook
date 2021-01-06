@@ -1,4 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
+
+import Button from '@material-ui/core/Button';
+
 import { instance as axios, getData } from './axios-instance';
 import { UserContext } from './providers/UserProvider';
 import { signInWithGoogle } from './firebase';
@@ -32,8 +35,6 @@ const App = () => {
     };
   }, [token, userId]);
 
-  console.log(token)
-
   let content;
 
   if (user && data) {
@@ -42,7 +43,14 @@ const App = () => {
     content = 
     <div id="login-page">
       <h2>Nincs bejelentkezett felhasználó</h2>
-      <button onClick={event => signInWithGoogle(event)}>Belépés Google-val</button>
+      <Button 
+        variant="contained" 
+        color="primary" 
+        size="large" 
+        onClick={event => signInWithGoogle(event)
+      }>
+        Belépés Google-val
+      </Button>
     </div>;
   } else {
     content = <p>Töltés...</p>;

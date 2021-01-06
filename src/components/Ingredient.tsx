@@ -1,5 +1,7 @@
 import React from 'react';
-import './Ingredient.css'
+
+import { IconButton, TextField, Grid } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 interface ingredientProps {
     content: {
@@ -19,38 +21,63 @@ const Ingredient: React.FC<ingredientProps> = ({ content, index, changeIngredien
     }
 
     return (
-        <div className="ingredient">
-            <div>-</div>
-            <input
-                className="text-right"
-                name="amount"
-                value={content.amount}
-                onChange={onInputChange}
-                autoComplete="off"
-                type="number"
-                required
-            />
-            <input
-                name="unit"
-                value={content.unit}
-                onChange={onInputChange}
-                autoComplete="off"
-                required
-            />
-            <input
-                name="description"
-                value={content.description}
-                onChange={onInputChange}
-                autoComplete="off"
-                required
-            />
-            <button 
-                className="delete-button"
-                onClick={() => deleteIngredient(index)}
-            >
-                <i className={`minus circle icon`} />
-            </button>
-        </div>
+        <Grid container item direction="row" justify="flex-start" alignItems="center" spacing={1}>
+            <Grid item xs={1}>
+                <TextField
+                    label="Meny."
+                    InputLabelProps={{ required: false }}
+                    size="small"
+                    name="amount"
+                    value={content.amount}
+                    onChange={onInputChange}
+                    autoComplete="off"
+                    required
+                    fullWidth
+                    variant="filled" 
+                />
+            </Grid>
+            <Grid item xs={2}>
+                <TextField
+                    label="Mért."
+                    InputLabelProps={{ required: false }}
+                    size="small"
+                    name="unit"
+                    value={content.unit}
+                    onChange={onInputChange}
+                    autoComplete="off"
+                    type="text"
+                    required
+                    fullWidth
+                    variant="filled" 
+                />
+            </Grid>
+            <Grid item xs={8}>
+                <TextField
+                    label="Leírás"
+                    InputLabelProps={{ required: false }}
+                    size="small"
+                    name="description"
+                    value={content.description}
+                    onChange={onInputChange}
+                    autoComplete="off"
+                    type="text"
+                    required
+                    fullWidth
+                    variant="filled" 
+                />
+            </Grid>
+            <Grid item xs={1}>
+                {index ?
+                    <IconButton
+                        aria-label="delete"
+                        onClick={() => deleteIngredient(index)}
+                        color="secondary"
+                    >
+                        <DeleteIcon />
+                    </IconButton>
+                : null}
+            </Grid>
+        </Grid>
     )
 }
 
